@@ -55,7 +55,10 @@ SCOPES = [
     "https://www.googleapis.com/auth/gmail.readonly"
 ]
 
-CLIENT_SECRET_FILE = "credentials.json"
+REDIRECT_URI = os.getenv(
+    "REDIRECT_URI",
+    "http://localhost:8000/auth/callback"
+)
 
 EMAIL_REGEX = re.compile(
     r'[\w\.-]+@[\w\.-]+\.\w+',
