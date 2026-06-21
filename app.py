@@ -33,13 +33,13 @@ from fastapi.staticfiles import StaticFiles
 
 REDIRECT_URI = os.getenv(
     "REDIRECT_URI",
-    "http://localhost:8000/auth/callback"
+    "https://gmail-extractor-vso1.onrender.com/auth/callback"
 )
-
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 app = FastAPI()
+CLIENT_SECRET_FILE = "/etc/secrets/credentials.json"
 
 app.mount(
     "/static",
@@ -55,10 +55,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/gmail.readonly"
 ]
 
-REDIRECT_URI = os.getenv(
-    "REDIRECT_URI",
-    "http://localhost:8000/auth/callback"
-)
+
 
 EMAIL_REGEX = re.compile(
     r'[\w\.-]+@[\w\.-]+\.\w+',
