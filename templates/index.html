@@ -16,68 +16,284 @@
     <link rel="stylesheet"
           href="/static/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --ink: #141b33;
+            --ink-soft: #232d4d;
+            --paper: #eef1f5;
+            --paper-line: rgba(238, 241, 245, 0.14);
+            --gold: #c99a3e;
+            --green: #3a9370;
+            --muted: #a9b1c6;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--ink);
+            color: var(--paper);
+            font-family: "IBM Plex Sans", -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+
+        .hero-container {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: stretch;
+        }
+
+        .hero-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6vw 5vw;
+            max-width: 640px;
+        }
+
+        .mark {
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid var(--gold);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .mark svg { width: 20px; height: 20px; display: block; }
+
+        h1.headline {
+            font-family: "Fraunces", Georgia, serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+            margin: 0 0 1.4rem 0;
+            color: #fbfaf7;
+        }
+
+        .lede {
+            font-size: 1.08rem;
+            line-height: 1.65;
+            color: var(--muted);
+            max-width: 46ch;
+            margin: 0 0 2.4rem 0;
+        }
+
+        .cta-row {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 3.2rem;
+        }
+
+        .btn-connect {
+            background: var(--gold);
+            color: #171008;
+            border: none;
+            font-family: "IBM Plex Sans", sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.95rem 2.1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .btn-connect:hover {
+            background: #d9ab52;
+            transform: translateY(-1px);
+        }
+
+        .btn-connect:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 3px;
+        }
+
+        .cta-note {
+            font-size: 0.85rem;
+            color: #7d869c;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border-top: 1px solid var(--paper-line);
+        }
+
+        .feature-list .feature-box {
+            display: grid;
+            grid-template-columns: 22px 1fr;
+            align-items: baseline;
+            gap: 0.9rem;
+            padding: 0.95rem 0;
+            border-bottom: 1px solid var(--paper-line);
+            font-size: 0.95rem;
+            color: #d9dded;
+        }
+
+        .feature-box .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            align-self: center;
+        }
+
+        .feature-box:nth-child(1) .dot { background: var(--gold); }
+        .feature-box:nth-child(2) .dot { background: var(--green); }
+        .feature-box:nth-child(3) .dot { background: #6d7fd6; }
+
+        /* --- illustration panel --- */
+
+        .hero-visual {
+            position: relative;
+            background: var(--paper);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual svg {
+            width: 78%;
+            height: auto;
+            max-width: 460px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+            .hero-visual {
+                min-height: 320px;
+                order: -1;
+            }
+            .hero-copy {
+                padding: 10vw 6vw;
+                max-width: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .grid-cell {
+                animation: rise 0.5s ease both;
+            }
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+
 </head>
 
 <body>
 
 <div class="hero-container">
 
-    <div class="card main-card shadow-lg">
+    <div class="hero-copy">
 
-        <div class="card-body text-center p-5">
+        <div class="mark">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 5.5L12 13L22 5.5" stroke="#c99a3e" stroke-width="1.4"/>
+                <rect x="2" y="4" width="20" height="15" rx="1" stroke="#c99a3e" stroke-width="1.4"/>
+            </svg>
+        </div>
 
-            <div class="logo-circle">
+        <h1 class="headline">
+            Turn Gmail labels into a lead list you can send today
+        </h1>
 
-                📧
+        <p class="lede">
+            Point it at any label, and it scans every message, pulls out the
+            sender details, and hands you back a clean spreadsheet &mdash;
+            no copy-pasting, no manual sorting.
+        </p>
 
-            </div>
-
-            <h1 class="display-5 fw-bold mt-4">
-
-                Gmail Lead Extractor
-
-            </h1>
-
-            <p class="lead text-muted mt-3">
-
-                Extract emails from Gmail labels and export them
-                directly into Excel files with real-time tracking.
-
-            </p>
-
-            <div class="feature-row">
-
-                <div class="feature-box">
-
-                    ⚡ Fast Extraction
-
-                </div>
-
-                <div class="feature-box">
-
-                    📊 Excel Export
-
-                </div>
-
-                <div class="feature-box">
-
-                    🔒 Secure Google Login
-
-                </div>
-
-            </div>
-
+        <div class="cta-row">
             <a href="/connect">
-
-                <button class="btn btn-primary btn-lg mt-4 px-5">
-
+                <button class="btn-connect">
                     Connect Gmail
-
                 </button>
-
             </a>
+            <span class="cta-note">Takes about 10 seconds</span>
+        </div>
+
+        <div class="feature-list">
+
+            <div class="feature-box">
+                <span class="dot"></span>
+                <span>Scans thousands of messages per label in minutes</span>
+            </div>
+
+            <div class="feature-box">
+                <span class="dot"></span>
+                <span>Exports straight to a ready-to-use Excel file</span>
+            </div>
+
+            <div class="feature-box">
+                <span class="dot"></span>
+                <span>Signs in with your own Google account, nothing is stored</span>
+            </div>
 
         </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <svg viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- envelope -->
+            <rect x="30" y="60" width="180" height="128" rx="4" fill="#ffffff" stroke="#141b33" stroke-width="1.5"/>
+            <path d="M30 66L120 138L210 66" stroke="#141b33" stroke-width="1.5" fill="none"/>
+
+            <!-- arrow -->
+            <path d="M222 124H262" stroke="#8b93a8" stroke-width="1.5"/>
+            <path d="M254 116L263 124L254 132" stroke="#8b93a8" stroke-width="1.5" fill="none"/>
+
+            <!-- spreadsheet grid, cells "rising" from the envelope -->
+            <g>
+                <rect class="grid-cell" x="276" y="70" width="120" height="24" fill="#ffffff" stroke="#141b33" stroke-width="1.2"/>
+                <rect class="grid-cell" x="276" y="94" width="120" height="24" fill="#ffffff" stroke="#141b33" stroke-width="1.2" style="animation-delay:.08s"/>
+                <rect class="grid-cell" x="276" y="118" width="120" height="24" fill="#e9f3ee" stroke="#3a9370" stroke-width="1.4" style="animation-delay:.16s"/>
+                <rect class="grid-cell" x="276" y="142" width="120" height="24" fill="#ffffff" stroke="#141b33" stroke-width="1.2" style="animation-delay:.24s"/>
+                <line x1="336" y1="70" x2="336" y2="166" stroke="#c7cede" stroke-width="1"/>
+            </g>
+
+            <!-- mail slip lines inside envelope -->
+            <line x1="52" y1="108" x2="130" y2="108" stroke="#c7cede" stroke-width="2"/>
+            <line x1="52" y1="122" x2="105" y2="122" stroke="#c7cede" stroke-width="2"/>
+
+            <!-- ledger baseline -->
+            <line x1="30" y1="230" x2="396" y2="230" stroke="#c7cede" stroke-width="1"/>
+            <rect x="30" y="248" width="366" height="1" fill="#c7cede"/>
+            <rect x="30" y="270" width="366" height="1" fill="#c7cede"/>
+            <rect x="30" y="292" width="366" height="1" fill="#c7cede"/>
+            <text x="30" y="244" font-family="IBM Plex Mono" font-size="11" fill="#8b93a8">lead@company.com</text>
+            <text x="30" y="266" font-family="IBM Plex Mono" font-size="11" fill="#8b93a8">hello@studio.co</text>
+            <text x="30" y="288" font-family="IBM Plex Mono" font-size="11" fill="#8b93a8">contact@brand.io</text>
+            <circle cx="384" cy="240" r="3" fill="#3a9370"/>
+            <circle cx="384" cy="262" r="3" fill="#3a9370"/>
+            <circle cx="384" cy="284" r="3" fill="#3a9370"/>
+
+        </svg>
 
     </div>
 
